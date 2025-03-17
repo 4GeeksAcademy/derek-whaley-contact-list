@@ -54,6 +54,28 @@ const AppProvider = ({ children }) => {
     }
   };
 
+  const updateContact = async (id, updatedContact) => {
+    const payload = {
+      name: updatedContact.name,
+      email: updatedContact.email,
+      phone: updatedContact.phone,
+      address: updatedContact.address,
+    };
+
+    try {
+      const res = await fetch(`${API_BASE}/contacts/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error("Failed to update contact.");
+      await res.json();
+      fetchContacts();
+    } catch (err) {
+      console.error("Update error:", err.message);
+    }
+  };
+
   const deleteContact = async (id) => {
     try {
       const res = await fetch(`${API_BASE}/contacts/${id}`, {
@@ -71,11 +93,14 @@ const AppProvider = ({ children }) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{ contacts, addContact, deleteContact }}>
+    <AppContext.Provider
+      value={{ contacts, addContact, updateContact, deleteContact }}
+    >
       {children}
     </AppContext.Provider>
   );
 };
 
 export default AppProvider;
+
 

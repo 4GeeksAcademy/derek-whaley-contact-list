@@ -37,9 +37,9 @@ const Home = () => {
                 </p>
               </div>
               <div className="contact-actions">
-                <button className="btn btn-edit" disabled>
+                <Link to={`/edit/${contact.id}`} className="btn btn-edit">
                   <i className="fas fa-edit"></i>
-                </button>
+                </Link>
                 <button
                   className="btn btn-delete"
                   onClick={() => deleteContact(contact.id)}
@@ -58,4 +58,5 @@ const Home = () => {
 };
 
 export default Home;
+
 

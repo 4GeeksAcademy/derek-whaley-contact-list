@@ -11,6 +11,7 @@ const AppRoutes = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/add" element={<Single />} />
+          <Route path="/edit/:id" element={<Single />} />
         </Routes>
       </Layout>
     </Router>
